@@ -10,6 +10,7 @@
 #define USE_SPEAKER           // to support Speaker functions
 #define USE_CANVAS            // to support Canvas functions
 #define USE_TOUCH
+#define USE_FONT
 
 #include "c_m5.h"
 #include "mrubyc.h"
