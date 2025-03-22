@@ -202,6 +202,56 @@ void draw_draw_png(LovyanGFX *dst, mrb_vm *vm, mrb_value *v, int argc) {
 
 #endif  // USE_FILE_FUNCTION
 
+static void draw_draw_pic_mem(LovyanGFX *dst, draw_pic_type t, const uint8_t * mem, size_t memsize, int x, int y){
+  switch(t){
+      case bmp:
+          dst->drawBmp(mem,memsize,x,y);
+          break;
+      case jpg:
+          dst->drawJpg(mem,memsize,x,y);
+          break;
+      case png:
+          dst->drawPng(mem,memsize,x,y);
+          break;
+  }
+}
+void draw_draw_pic_str(LovyanGFX *dst, draw_pic_type t, mrb_vm *vm, mrb_value *v, int argc)
+{
+    if(argc<3){
+        mrbc_raise(vm, MRBC_CLASS(ArgumentError),"too few arguments");
+        return;
+    }
+    if(GET_ARG(1).tt != MRBC_TT_STRING){
+        mrbc_raise(vm, MRBC_CLASS(ArgumentError),"not a string");
+        SET_FALSE_RETURN();
+        return;
+    }
+    const uint8_t *mem = GET_ARG(1).string->data;
+    size_t memsize = GET_ARG(1).string->size;
+
+    int x = val_to_i(vm, v, GET_ARG(2),argc);
+    int y = val_to_i(vm, v, GET_ARG(3),argc);
+
+    draw_draw_pic_mem(dst,t, mem, memsize,x,y);
+    
+    SET_TRUE_RETURN();
+}
+
+void draw_draw_bmpstr(LovyanGFX *dst, mrb_vm *vm, mrb_value *v, int argc)
+{
+    draw_draw_pic_str(dst,bmp,vm,v,argc);
+}
+
+void draw_draw_jpgstr(LovyanGFX *dst, mrb_vm *vm, mrb_value *v, int argc)
+{
+    draw_draw_pic_str(dst, jpg,vm,v,argc);
+}
+
+void draw_draw_pngstr(LovyanGFX *dst, mrb_vm *vm, mrb_value *v, int argc)
+{
+    draw_draw_pic_str(dst, png,vm,v,argc);
+}
+
 void draw_set_rotation(LovyanGFX *dst, mrb_vm *vm, mrb_value *v, int argc) {
   if (argc > 0) {
     int rotation = val_to_i(vm, v, GET_ARG(1), argc);

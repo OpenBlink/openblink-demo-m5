@@ -164,6 +164,24 @@ static void class_canvas_draw_png(mrb_vm *vm, mrb_value *v, int argc) {
 
 #endif  // USE_FILE_FUNCTION
 
+static void class_canvas_draw_bmpstr(mrb_vm *vm, mrb_value *v, int argc)
+{
+    M5Canvas *canvas =get_checked_data(M5Canvas,vm, v);
+    draw_draw_bmpstr(canvas,vm,v,argc);
+}
+
+static void class_canvas_draw_jpgstr(mrb_vm *vm, mrb_value *v, int argc)
+{
+    M5Canvas *canvas =get_checked_data(M5Canvas,vm, v);
+    draw_draw_jpgstr(canvas,vm,v,argc);
+}
+
+static void class_canvas_draw_pngstr(mrb_vm *vm, mrb_value *v, int argc)
+{
+    M5Canvas *canvas =get_checked_data(M5Canvas,vm, v);
+    draw_draw_pngstr(canvas,vm,v,argc);
+}
+
 static void class_canvas_set_rotation(mrb_vm *vm, mrb_value *v, int argc) {
   M5Canvas *canvas = get_checked_data(M5Canvas, vm, v);
   draw_set_rotation(canvas, vm, v, argc);
@@ -205,7 +223,10 @@ void class_canvas_init() {
   mrbc_define_method(0, canvas_class, "draw_jpgfile", class_canvas_draw_jpg);
   mrbc_define_method(0, canvas_class, "draw_pngfile", class_canvas_draw_png);
 #endif  // USE_FILE_FUNCTION
-  mrbc_define_method(0, canvas_class, "set_rotation",
+mrbc_define_method(0, canvas_class, "draw_bmpstr", class_canvas_draw_bmpstr);
+mrbc_define_method(0, canvas_class, "draw_jpgstr", class_canvas_draw_jpgstr);
+mrbc_define_method(0, canvas_class, "draw_pngstr", class_canvas_draw_pngstr);
+mrbc_define_method(0, canvas_class, "set_rotation",
                      class_canvas_set_rotation);
   mrbc_define_method(0, canvas_class, "dimension", c_canvas_get_dimension);
 }

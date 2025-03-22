@@ -91,6 +91,21 @@ static void class_display_draw_png(mrb_vm *vm, mrb_value *v, int argc) {
 }
 #endif  // USE_FILE_FUNCTION
 
+static void class_display_draw_bmpstr(mrb_vm *vm, mrb_value *v, int argc)
+{
+    draw_draw_bmpstr(&M5.Display,vm,v,argc);
+}
+
+static void class_display_draw_jpgstr(mrb_vm *vm, mrb_value *v, int argc)
+{
+    draw_draw_jpgstr(&M5.Display,vm,v,argc);
+}
+
+static void class_display_draw_pngstr(mrb_vm *vm, mrb_value *v, int argc)
+{
+    draw_draw_pngstr(&M5.Display,vm,v,argc);
+}
+
 static void class_display_scroll(mrb_vm *vm, mrb_value *v, int argc) {
   draw_scroll(&M5.Display, vm, v, argc);
 }
@@ -176,8 +191,11 @@ void class_display_button_init() {
   mrbc_define_method(0, class_display, "draw_jpgfile", class_display_draw_jpg);
   mrbc_define_method(0, class_display, "draw_pngfile", class_display_draw_png);
 #endif  // USE_FILE_FUNCTION
-  mrbc_define_method(0, class_display, "wait_display",
-                     class_display_wait_display);
+  mrbc_define_method(0, class_display, "wait_display", class_display_wait_display);
+  mrbc_define_method(0, class_display, "draw_bmpstr", class_display_draw_bmpstr);
+  mrbc_define_method(0, class_display, "draw_jpgstr", class_display_draw_jpgstr);
+  mrbc_define_method(0, class_display, "draw_pngstr", class_display_draw_pngstr);
+
   mrbc_define_method(0, class_display, "scroll", class_display_scroll);
   mrbc_define_method(0, class_display, "set_rotation",
                      class_display_set_rotation);
