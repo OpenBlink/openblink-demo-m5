@@ -84,3 +84,20 @@ while true
   # 主要处理
 end
 ```
+
+### factory_reset! 方法
+
+#### 参数
+
+无
+
+#### 返回值 (bool)
+
+- true: 成功
+- false: 失败
+
+#### 代码示例
+
+```ruby
+Blink.factory_reset!
+```

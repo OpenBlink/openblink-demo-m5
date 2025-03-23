@@ -84,3 +84,20 @@ while true
   # メイン処理
 end
 ```
+
+### factory_reset! メソッド
+
+#### 引数
+
+なし
+
+#### 戻り値 (bool)
+
+- true: 成功
+- false: 失敗
+
+#### コード例
+
+```ruby
+Blink.factory_reset!
+```

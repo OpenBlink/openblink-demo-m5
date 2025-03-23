@@ -11,6 +11,7 @@
  */
 #include "blink.h"
 
+#include "../app/blink.h"
 #include "../lib/fn.h"
 #include "../main.h"
 #include "mrubyc.h"
@@ -23,6 +24,7 @@
  * @param argc Number of arguments
  */
 static void c_get_reload(mrb_vm *vm, mrb_value *v, int argc);
+static void c_reset_blink(mrb_vm *vm, mrb_value *v, int argc);
 
 /**
  * @brief Defines the Blink class and methods for mruby/c
@@ -36,6 +38,7 @@ fn_t api_blink_define(void) {
   mrb_class *class_blink;
   class_blink = mrbc_define_class(0, "Blink", mrbc_class_object);
   mrbc_define_method(0, class_blink, "req_reload?", c_get_reload);
+  mrbc_define_method(0, class_blink, "factory_reset!", c_reset_blink);
   return kSuccess;
 }
 
@@ -50,4 +53,22 @@ fn_t api_blink_define(void) {
  */
 static void c_get_reload(mrb_vm *vm, mrb_value *v, int argc) {
   SET_BOOL_RETURN(app_mrubyc_vm_get_reload());
+}
+
+/**
+ * @brief Implementation of the factory_reset! method for the Blink class
+ *
+ * Resets the device to factory blink bytecodes.
+ *
+ * @param vm Pointer to the mruby/c VM
+ * @param v Pointer to the method arguments
+ * @param argc Number of arguments
+ */
+static void c_reset_blink(mrb_vm *vm, mrb_value *v, int argc) {
+  if (0 == blink_delete()) {
+    esp_restart();
+    SET_TRUE_RETURN();
+  } else {
+    SET_FALSE_RETURN();
+  }
 }

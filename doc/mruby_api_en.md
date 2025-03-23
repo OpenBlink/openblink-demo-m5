@@ -84,3 +84,20 @@ while true
   # Main processing
 end
 ```
+
+### factory_reset! Method
+
+#### Arguments
+
+None
+
+#### Return Value (bool)
+
+- true: Success
+- false: Fail
+
+#### Code Example
+
+```ruby
+Blink.factory_reset!
+```
