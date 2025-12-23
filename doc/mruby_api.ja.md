@@ -99,9 +99,14 @@ end
 #### コード例
 
 ```ruby
-Blink.lock
+while true
+  return if Blink.req_reload?
+  # メイン処理
+
+  Blink.lock
   # クリティカル処理
-Blink.unlock
+  Blink.unlock
+end
 ```
 
 ### unlock メソッド
@@ -118,9 +123,14 @@ Blink.unlock
 #### コード例
 
 ```ruby
-Blink.lock
+while true
+  return if Blink.req_reload?
+  # メイン処理
+
+  Blink.lock
   # クリティカル処理
-Blink.unlock
+  Blink.unlock
+end
 ```
 
 ### factory_reset! メソッド

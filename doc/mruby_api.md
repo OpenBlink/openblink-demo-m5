@@ -99,9 +99,14 @@ None
 #### Code Example
 
 ```ruby
-Blink.lock
+while true
+  return if Blink.req_reload?
+  # Main processing
+
+  Blink.lock
   # Critical process
-Blink.unlock
+  Blink.unlock
+end
 ```
 
 ### unlock Method
@@ -118,9 +123,14 @@ None
 #### Code Example
 
 ```ruby
-Blink.lock
+while true
+  return if Blink.req_reload?
+  # Main processing
+
+  Blink.lock
   # Critical process
-Blink.unlock
+  Blink.unlock
+end
 ```
 
 ### factory_reset! Method

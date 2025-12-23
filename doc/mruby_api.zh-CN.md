@@ -99,9 +99,14 @@ end
 #### 代码示例
 
 ```ruby
-Blink.lock
+while true
+  return if Blink.req_reload?
+  # Main processing
+
+  Blink.lock
   # Critical process
-Blink.unlock
+  Blink.unlock
+end
 ```
 
 ### unlock 方法
@@ -118,9 +123,14 @@ Blink.unlock
 #### 代码示例
 
 ```ruby
-Blink.lock
+while true
+  return if Blink.req_reload?
+  # Main processing
+
+  Blink.lock
   # Critical process
-Blink.unlock
+  Blink.unlock
+end
 ```
 
 ### factory_reset! 方法
