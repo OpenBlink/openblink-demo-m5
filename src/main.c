@@ -55,6 +55,7 @@ void app_main() {
   while (1) {
     for (size_t i = 0; i < MAX_VM_COUNT; i++) {
       tcb[i] = NULL;
+      blink_locked[i] = false;
     }
 
     // mruby/c initialize
