@@ -95,7 +95,7 @@ static void c_lock_blink(mrb_vm* vm, mrb_value* v, int argc) {
 }
 
 /**
- * @brief Implementation of the lock method for the Blink class
+ * @brief Implementation of the unlock method for the Blink class
  *
  * Unlock the blink
  *
