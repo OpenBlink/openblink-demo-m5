@@ -25,7 +25,6 @@ $ pio run -e m5stack-stamps3 -t erase -t upload
 
 > **Note:** Both `m5stack-stamps3` and `m5stack-atom` environments are configured in platformio.ini and can be used for device operations. The examples above use `m5stack-stamps3`, but you can use `m5stack-atom` by replacing `m5stack-stamps3` with `m5stack-atom` in the commands.
 
-
 ## Verified Hardware
 
 The following hardware platforms have been tested with OpenBlink:
@@ -48,10 +47,6 @@ OpenBlink provides a simple API for controlling the onboard RGB LED through mrub
 
 - `LED.set([r, g, b])` - Sets the RGB LED color. Each value should be between 0-255.
 
-#### Blink Class
-
-- `Blink.req_reload?` - Checks if a code reload is requested.
-
 ### Example: LED Blinking Code
 
 Here's a simple example that makes the LED blink in different colors:
@@ -71,8 +66,6 @@ while true do
   LED.set([0, 0, 255])
   sleep 1
 
-  # Check if reload is requested
-  break if Blink.req_reload?
 end
 ```
 
@@ -80,5 +73,3 @@ This example demonstrates:
 
 - Setting RGB LED colors using the `LED.set` method
 - Using arrays to specify RGB values
-- Implementing a clean exit when code reload is requested
-- The `break if Blink.req_reload?` statement is crucial in OpenBlink applications. It allows the program to gracefully exit the current execution loop when a code reload is requested through the Bluetooth interface. Without this check, the program would continue running and ignore reload requests, making development and debugging difficult. This mechanism is what enables the "Blink" feature - the ability to update code wirelessly in less than 0.1 seconds without restarting the microprocessor.

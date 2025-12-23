@@ -23,8 +23,10 @@
  * @param v Pointer to the method arguments
  * @param argc Number of arguments
  */
-static void c_get_reload(mrb_vm *vm, mrb_value *v, int argc);
-static void c_reset_blink(mrb_vm *vm, mrb_value *v, int argc);
+static void c_get_reload(mrb_vm* vm, mrb_value* v, int argc);
+static void c_reset_blink(mrb_vm* vm, mrb_value* v, int argc);
+static void c_lock_blink(mrb_vm* vm, mrb_value* v, int argc);
+static void c_unlock_blink(mrb_vm* vm, mrb_value* v, int argc);
 
 /**
  * @brief Defines the Blink class and methods for mruby/c
@@ -35,10 +37,12 @@ static void c_reset_blink(mrb_vm *vm, mrb_value *v, int argc);
  * @return kSuccess always
  */
 fn_t api_blink_define(void) {
-  mrb_class *class_blink;
+  mrb_class* class_blink;
   class_blink = mrbc_define_class(0, "Blink", mrbc_class_object);
   mrbc_define_method(0, class_blink, "req_reload?", c_get_reload);
   mrbc_define_method(0, class_blink, "factory_reset!", c_reset_blink);
+  mrbc_define_method(0, class_blink, "lock", c_lock_blink);
+  mrbc_define_method(0, class_blink, "unlock", c_unlock_blink);
   return kSuccess;
 }
 
@@ -51,7 +55,7 @@ fn_t api_blink_define(void) {
  * @param v Pointer to the method arguments
  * @param argc Number of arguments
  */
-static void c_get_reload(mrb_vm *vm, mrb_value *v, int argc) {
+static void c_get_reload(mrb_vm* vm, mrb_value* v, int argc) {
   SET_BOOL_RETURN(app_mrubyc_vm_get_reload());
 }
 
@@ -64,9 +68,43 @@ static void c_get_reload(mrb_vm *vm, mrb_value *v, int argc) {
  * @param v Pointer to the method arguments
  * @param argc Number of arguments
  */
-static void c_reset_blink(mrb_vm *vm, mrb_value *v, int argc) {
+static void c_reset_blink(mrb_vm* vm, mrb_value* v, int argc) {
   if (0 == blink_delete()) {
     esp_restart();
+    SET_TRUE_RETURN();
+  } else {
+    SET_FALSE_RETURN();
+  }
+}
+
+/**
+ * @brief Implementation of the lock method for the Blink class
+ *
+ * Lock the blink
+ *
+ * @param vm Pointer to the mruby/c VM
+ * @param v Pointer to the method arguments
+ * @param argc Number of arguments
+ */
+static void c_lock_blink(mrb_vm* vm, mrb_value* v, int argc) {
+  if (kSuccess == app_mrubyc_vm_set_blink_lock(true, vm->vm_id)) {
+    SET_TRUE_RETURN();
+  } else {
+    SET_FALSE_RETURN();
+  }
+}
+
+/**
+ * @brief Implementation of the lock method for the Blink class
+ *
+ * Unlock the blink
+ *
+ * @param vm Pointer to the mruby/c VM
+ * @param v Pointer to the method arguments
+ * @param argc Number of arguments
+ */
+static void c_unlock_blink(mrb_vm* vm, mrb_value* v, int argc) {
+  if (kSuccess == app_mrubyc_vm_set_blink_lock(false, vm->vm_id)) {
     SET_TRUE_RETURN();
   } else {
     SET_FALSE_RETURN();

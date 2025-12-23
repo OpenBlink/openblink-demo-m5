@@ -85,6 +85,44 @@ while true
 end
 ```
 
+### lock Method
+
+#### Arguments
+
+None
+
+#### Return Value (bool)
+
+- true: Success
+- false: Failure
+
+#### Code Example
+
+```ruby
+Blink.lock
+  # Critical process
+Blink.unlock
+```
+
+### unlock Method
+
+#### Arguments
+
+None
+
+#### Return Value (bool)
+
+- true: Success
+- false: Failure
+
+#### Code Example
+
+```ruby
+Blink.lock
+  # Critical process
+Blink.unlock
+```
+
 ### factory_reset! Method
 
 - Upon successful processing, a restart (soft reset) will be executed.

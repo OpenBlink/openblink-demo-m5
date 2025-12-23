@@ -23,8 +23,7 @@ $ pio run
 $ pio run -e m5stack-stamps3 -t erase -t upload
 ```
 
-> **注意:** platformio.ini中配置了`m5stack-stamps3`和`m5stack-atom`两种环境，可用于设备操作。上面的示例使用`m5stack-stamps3`，但您可以通过将命令中的`m5stack-stamps3`替换为`m5stack-atom`来使用`m5stack-atom`。
-
+> **注意:** platformio.ini 中配置了`m5stack-stamps3`和`m5stack-atom`两种环境，可用于设备操作。上面的示例使用`m5stack-stamps3`，但您可以通过将命令中的`m5stack-stamps3`替换为`m5stack-atom`来使用`m5stack-atom`。
 
 ## 已验证的硬件
 
@@ -36,7 +35,7 @@ $ pio run -e m5stack-stamps3 -t erase -t upload
 ## 文档
 
 有关更详细的文档，请查看[文档目录](./doc)
-如需查阅AI驱动的全面文档以帮助您理解代码库，请访问[DeepWiki](https://deepwiki.com/OpenBlink/openblink-demo-m5)
+如需查阅 AI 驱动的全面文档以帮助您理解代码库，请访问[DeepWiki](https://deepwiki.com/OpenBlink/openblink-demo-m5)
 
 ## mruby/c LED 控制 API
 
@@ -47,10 +46,6 @@ OpenBlink 提供了一个简单的 API，通过 mruby/c 控制板载 RGB LED。
 #### LED 类
 
 - `LED.set([r, g, b])` - 设置 RGB LED 颜色。每个值应在 0-255 之间。
-
-#### Blink 类
-
-- `Blink.req_reload?` - 检查是否请求代码重载。
 
 ### 示例：LED 闪烁代码
 
@@ -71,8 +66,6 @@ while true do
   LED.set([0, 0, 255])
   sleep 1
 
-  # 检查是否请求重载
-  break if Blink.req_reload?
 end
 ```
 
@@ -80,5 +73,3 @@ end
 
 - 使用`LED.set`方法设置 RGB LED 颜色
 - 使用数组指定 RGB 值
-- 在请求代码重载时实现干净退出
-- `break if Blink.req_reload?` 语句在 OpenBlink 应用程序中至关重要。它允许程序在通过蓝牙接口请求代码重载时优雅地退出当前执行循环。如果没有这个检查，程序将继续运行并忽略重载请求，使开发和调试变得困难。这种机制正是实现"Blink"功能的关键 - 能够在不重启微处理器的情况下，以不到 0.1 秒的时间无线更新代码。

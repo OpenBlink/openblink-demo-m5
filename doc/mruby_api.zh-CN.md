@@ -85,6 +85,44 @@ while true
 end
 ```
 
+### lock 方法
+
+#### 参数
+
+无
+
+#### 返回值 (bool)
+
+- true: 成功
+- false: 失败
+
+#### 代码示例
+
+```ruby
+Blink.lock
+  # Critical process
+Blink.unlock
+```
+
+### unlock 方法
+
+#### 参数
+
+无
+
+#### 返回值 (bool)
+
+- true: 成功
+- false: 失败
+
+#### 代码示例
+
+```ruby
+Blink.lock
+  # Critical process
+Blink.unlock
+```
+
 ### factory_reset! 方法
 
 - 处理成功后，系统将执行重启（软重置）。
@@ -123,7 +161,7 @@ Display 类提供用于控制设备显示屏的方法。
 - `Display.clear()`: 清除显示屏。
 - `Display.set_cursor(x, y)`: 设置光标位置。
 - `Display.get_cursor()`: 获取当前光标位置，返回 [x, y]。
-- `Display.color565(r, g, b)`: 将RGB值转换为16位颜色值。
+- `Display.color565(r, g, b)`: 将 RGB 值转换为 16 位颜色值。
 - `Display.dimension()`: 返回显示屏尺寸，格式为 [宽度, 高度]。
 
 #### 绘图方法
@@ -138,17 +176,17 @@ Display 类提供用于控制设备显示屏的方法。
 
 #### 图像方法
 
-- `Display.draw_bmpfile(path, x, y)`: 在指定位置绘制BMP图像文件。
-- `Display.draw_jpgfile(path, x, y)`: 在指定位置绘制JPEG图像文件。
-- `Display.draw_pngfile(path, x, y)`: 在指定位置绘制PNG图像文件。
-- `Display.draw_bmpstr(data, x, y)`: 在指定位置从二进制数据绘制BMP图像。
-- `Display.draw_jpgstr(data, x, y)`: 在指定位置从二进制数据绘制JPEG图像。
-- `Display.draw_pngstr(data, x, y)`: 在指定位置从二进制数据绘制PNG图像。
+- `Display.draw_bmpfile(path, x, y)`: 在指定位置绘制 BMP 图像文件。
+- `Display.draw_jpgfile(path, x, y)`: 在指定位置绘制 JPEG 图像文件。
+- `Display.draw_pngfile(path, x, y)`: 在指定位置绘制 PNG 图像文件。
+- `Display.draw_bmpstr(data, x, y)`: 在指定位置从二进制数据绘制 BMP 图像。
+- `Display.draw_jpgstr(data, x, y)`: 在指定位置从二进制数据绘制 JPEG 图像。
+- `Display.draw_pngstr(data, x, y)`: 在指定位置从二进制数据绘制 PNG 图像。
 
 #### 其他方法
 
 - `Display.scroll(dx, dy)`: 按指定量滚动显示屏。
-- `Display.set_rotation(rotation)`: 设置显示屏旋转（0-3，表示0°、90°、180°、270°）。
+- `Display.set_rotation(rotation)`: 设置显示屏旋转（0-3，表示 0°、90°、180°、270°）。
 - `Display.wait_display()`: 等待显示操作完成。
 
 ---
@@ -185,30 +223,30 @@ Canvas 类提供用于绘图操作的离屏缓冲区，随后可以将其推送�
 
 #### 图像方法
 
-- `Canvas.draw_bmpfile(path, x, y)`: 在指定位置绘制BMP图像文件。
-- `Canvas.draw_jpgfile(path, x, y)`: 在指定位置绘制JPEG图像文件。
-- `Canvas.draw_pngfile(path, x, y)`: 在指定位置绘制PNG图像文件。
-- `Canvas.draw_bmpstr(data, x, y)`: 在指定位置从二进制数据绘制BMP图像。
-- `Canvas.draw_jpgstr(data, x, y)`: 在指定位置从二进制数据绘制JPEG图像。
-- `Canvas.draw_pngstr(data, x, y)`: 在指定位置从二进制数据绘制PNG图像。
+- `Canvas.draw_bmpfile(path, x, y)`: 在指定位置绘制 BMP 图像文件。
+- `Canvas.draw_jpgfile(path, x, y)`: 在指定位置绘制 JPEG 图像文件。
+- `Canvas.draw_pngfile(path, x, y)`: 在指定位置绘制 PNG 图像文件。
+- `Canvas.draw_bmpstr(data, x, y)`: 在指定位置从二进制数据绘制 BMP 图像。
+- `Canvas.draw_jpgstr(data, x, y)`: 在指定位置从二进制数据绘制 JPEG 图像。
+- `Canvas.draw_pngstr(data, x, y)`: 在指定位置从二进制数据绘制 PNG 图像。
 
 #### 其他方法
 
 - `Canvas.scroll(dx, dy)`: 按指定量滚动画布。
-- `Canvas.set_rotation(rotation)`: 设置画布旋转（0-3，表示0°、90°、180°、270°）。
+- `Canvas.set_rotation(rotation)`: 设置画布旋转（0-3，表示 0°、90°、180°、270°）。
 - `Canvas.dimension()`: 返回画布尺寸，格式为 [宽度, 高度]。
 
 ---
 
 ## 按钮常量
 
-OpenBlink提供用于访问设备上物理按钮的常量。
+OpenBlink 提供用于访问设备上物理按钮的常量。
 
 #### 常量
 
-- `BtnA`: 按钮A的引用。
-- `BtnB`: 按钮B的引用。
-- `BtnC`: 按钮C的引用。
+- `BtnA`: 按钮 A 的引用。
+- `BtnB`: 按钮 B 的引用。
+- `BtnC`: 按钮 C 的引用。
 
 #### 方法
 

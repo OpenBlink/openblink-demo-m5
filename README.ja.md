@@ -23,8 +23,7 @@ $ pio run
 $ pio run -e m5stack-stamps3 -t erase -t upload
 ```
 
-> **注意:** platformio.iniには`m5stack-stamps3`と`m5stack-atom`の両方の環境が設定されており、デバイス操作に使用できます。上記の例では`m5stack-stamps3`を使用していますが、コマンド内の「`m5stack-stamps3`」を「`m5stack-atom`」に置き換えることで`m5stack-atom`を使用できます。
-
+> **注意:** platformio.ini には`m5stack-stamps3`と`m5stack-atom`の両方の環境が設定されており、デバイス操作に使用できます。上記の例では`m5stack-stamps3`を使用していますが、コマンド内の「`m5stack-stamps3`」を「`m5stack-atom`」に置き換えることで`m5stack-atom`を使用できます。
 
 ## 検証済みハードウェア
 
@@ -36,7 +35,7 @@ $ pio run -e m5stack-stamps3 -t erase -t upload
 ## ドキュメント
 
 より詳細なドキュメントについては、[doc ディレクトリ](./doc)をご確認ください。
-コードベースの理解を助けるAI駆動の包括的なドキュメントは、[DeepWiki](https://deepwiki.com/OpenBlink/openblink-demo-m5)をご覧ください。
+コードベースの理解を助ける AI 駆動の包括的なドキュメントは、[DeepWiki](https://deepwiki.com/OpenBlink/openblink-demo-m5)をご覧ください。
 
 ## mruby/c LED 制御 API
 
@@ -47,10 +46,6 @@ OpenBlink は mruby/c を通じて基板上の RGB LED を制御するための�
 #### LED クラス
 
 - `LED.set([r, g, b])` - RGB LED の色を設定します。各値は 0〜255 の間である必要があります。
-
-#### Blink クラス
-
-- `Blink.req_reload?` - コードのリロードが要求されているかどうかを確認します。
 
 ### 例：LED 点滅コード
 
@@ -71,8 +66,6 @@ while true do
   LED.set([0, 0, 255])
   sleep 1
 
-  # リロードが要求されているか確認
-  break if Blink.req_reload?
 end
 ```
 
@@ -80,5 +73,3 @@ end
 
 - `LED.set`メソッドを使用した RGB LED 色の設定
 - RGB 値を指定するための配列の使用
-- コードリロードが要求された場合のクリーンな終了の実装
-- `break if Blink.req_reload?`文は OpenBlink アプリケーションにおいて非常に重要です。これにより、Bluetooth インターフェースを通じてコードのリロードが要求された際に、現在の実行ループを適切に終了させることができます。この確認がなければ、プログラムは実行を継続してリロード要求を無視するため、開発やデバッグが困難になります。このメカニズムが「Blink」機能を可能にしています - マイクロプロセッサを再起動せずに 0.1 秒未満でワイヤレスにコードを更新する能力です。

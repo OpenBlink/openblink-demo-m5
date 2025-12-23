@@ -33,7 +33,8 @@ extern void init_c_m5u();  // for features in m5u directory
 #define MRBC_HEAP_MEMORY_SIZE (15 * 1024)
 
 static bool request_mruby_reload = false;
-
+static bool blink_locked[MAX_VM_COUNT] = {false};
+static mrbc_tcb* tcb[MAX_VM_COUNT] = {NULL};
 static uint8_t memory_pool[MRBC_HEAP_MEMORY_SIZE] = {0};
 static uint8_t bytecode_slot2[BLINK_MAX_BYTECODE_SIZE] = {0};
 
@@ -52,7 +53,9 @@ void app_main() {
   }
 
   while (1) {
-    mrbc_tcb *tcb[MAX_VM_COUNT] = {NULL};
+    for (size_t i = 0; i < MAX_VM_COUNT; i++) {
+      tcb[i] = NULL;
+    }
 
     // mruby/c initialize
     mrbc_init(memory_pool, MRBC_HEAP_MEMORY_SIZE);
@@ -112,6 +115,12 @@ void app_main() {
  */
 fn_t app_mrubyc_vm_set_reload(void) {
   request_mruby_reload = true;
+  for (size_t i = 0; i < MAX_VM_COUNT; i++) {
+    if ((NULL != tcb[i]) && (false == blink_locked[i])) {
+      mrbc_terminate_task(tcb[i]);
+      mrbc_delete_task(tcb[i]);
+    }
+  }
   return kSuccess;
 }
 
@@ -121,3 +130,13 @@ fn_t app_mrubyc_vm_set_reload(void) {
  * @return true if reload is requested, false otherwise
  */
 bool app_mrubyc_vm_get_reload(void) { return request_mruby_reload; }
+
+/**
+ * @brief Sets the lock state of the blink request
+ *
+ * @return kSuccess always
+ */
+fn_t app_mrubyc_vm_set_blink_lock(const bool kState, const uint8_t kVmId) {
+  blink_locked[kVmId] = kState;
+  return kSuccess;
+}

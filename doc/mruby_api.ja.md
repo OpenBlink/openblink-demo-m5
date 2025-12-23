@@ -85,6 +85,44 @@ while true
 end
 ```
 
+### lock メソッド
+
+#### 引数
+
+なし
+
+#### 戻り値 (bool)
+
+- true: 成功
+- false: 失敗
+
+#### コード例
+
+```ruby
+Blink.lock
+  # クリティカル処理
+Blink.unlock
+```
+
+### unlock メソッド
+
+#### 引数
+
+なし
+
+#### 戻り値 (bool)
+
+- true: 成功
+- false: 失敗
+
+#### コード例
+
+```ruby
+Blink.lock
+  # クリティカル処理
+Blink.unlock
+```
+
 ### factory_reset! メソッド
 
 - 処理が成功すると、再起動（ソフトリセット）を実行します。
@@ -123,7 +161,7 @@ Display クラスは、デバイスのディスプレイを制御するための
 - `Display.clear()`: ディスプレイをクリアします。
 - `Display.set_cursor(x, y)`: カーソル位置を設定します。
 - `Display.get_cursor()`: 現在のカーソル位置を [x, y] として取得します。
-- `Display.color565(r, g, b)`: RGB値を16ビットの色値に変換します。
+- `Display.color565(r, g, b)`: RGB 値を 16 ビットの色値に変換します。
 - `Display.dimension()`: ディスプレイの寸法を [幅, 高さ] として返します。
 
 #### 描画メソッド
@@ -134,21 +172,21 @@ Display クラスは、デバイスのディスプレイを制御するための
 - `Display.draw_rect(x, y, width, height, color)`: 指定した色で長方形の輪郭を描画します。
 - `Display.fill_circle(x, y, radius, color)`: 指定した色で円を塗りつぶします。
 - `Display.draw_circle(x, y, radius, color)`: 指定した色で円の輪郭を描画します。
-- `Display.draw_line(x0, y0, x1, y1, color)`: 2点間に線を描画します。
+- `Display.draw_line(x0, y0, x1, y1, color)`: 2 点間に線を描画します。
 
 #### 画像メソッド
 
-- `Display.draw_bmpfile(path, x, y)`: 指定した位置にBMP画像ファイルを描画します。
-- `Display.draw_jpgfile(path, x, y)`: 指定した位置にJPEG画像ファイルを描画します。
-- `Display.draw_pngfile(path, x, y)`: 指定した位置にPNG画像ファイルを描画します。
-- `Display.draw_bmpstr(data, x, y)`: 指定した位置にバイナリデータからBMP画像を描画します。
-- `Display.draw_jpgstr(data, x, y)`: 指定した位置にバイナリデータからJPEG画像を描画します。
-- `Display.draw_pngstr(data, x, y)`: 指定した位置にバイナリデータからPNG画像を描画します。
+- `Display.draw_bmpfile(path, x, y)`: 指定した位置に BMP 画像ファイルを描画します。
+- `Display.draw_jpgfile(path, x, y)`: 指定した位置に JPEG 画像ファイルを描画します。
+- `Display.draw_pngfile(path, x, y)`: 指定した位置に PNG 画像ファイルを描画します。
+- `Display.draw_bmpstr(data, x, y)`: 指定した位置にバイナリデータから BMP 画像を描画します。
+- `Display.draw_jpgstr(data, x, y)`: 指定した位置にバイナリデータから JPEG 画像を描画します。
+- `Display.draw_pngstr(data, x, y)`: 指定した位置にバイナリデータから PNG 画像を描画します。
 
 #### その他のメソッド
 
 - `Display.scroll(dx, dy)`: 指定した量だけディスプレイをスクロールします。
-- `Display.set_rotation(rotation)`: ディスプレイの回転を設定します（0-3、0°、90°、180°、270°を表します）。
+- `Display.set_rotation(rotation)`: ディスプレイの回転を設定します（0-3、0°、90°、180°、270° を表します）。
 - `Display.wait_display()`: ディスプレイ操作が完了するまで待機します。
 
 ---
@@ -181,34 +219,34 @@ Canvas クラスは、描画操作のためのオフスクリーンバッファ�
 - `Canvas.draw_rect(x, y, width, height, color)`: 指定した色で長方形の輪郭を描画します。
 - `Canvas.fill_circle(x, y, radius, color)`: 指定した色で円を塗りつぶします。
 - `Canvas.draw_circle(x, y, radius, color)`: 指定した色で円の輪郭を描画します。
-- `Canvas.draw_line(x0, y0, x1, y1, color)`: 2点間に線を描画します。
+- `Canvas.draw_line(x0, y0, x1, y1, color)`: 2 点間に線を描画します。
 
 #### 画像メソッド
 
-- `Canvas.draw_bmpfile(path, x, y)`: 指定した位置にBMP画像ファイルを描画します。
-- `Canvas.draw_jpgfile(path, x, y)`: 指定した位置にJPEG画像ファイルを描画します。
-- `Canvas.draw_pngfile(path, x, y)`: 指定した位置にPNG画像ファイルを描画します。
-- `Canvas.draw_bmpstr(data, x, y)`: 指定した位置にバイナリデータからBMP画像を描画します。
-- `Canvas.draw_jpgstr(data, x, y)`: 指定した位置にバイナリデータからJPEG画像を描画します。
-- `Canvas.draw_pngstr(data, x, y)`: 指定した位置にバイナリデータからPNG画像を描画します。
+- `Canvas.draw_bmpfile(path, x, y)`: 指定した位置に BMP 画像ファイルを描画します。
+- `Canvas.draw_jpgfile(path, x, y)`: 指定した位置に JPEG 画像ファイルを描画します。
+- `Canvas.draw_pngfile(path, x, y)`: 指定した位置に PNG 画像ファイルを描画します。
+- `Canvas.draw_bmpstr(data, x, y)`: 指定した位置にバイナリデータから BMP 画像を描画します。
+- `Canvas.draw_jpgstr(data, x, y)`: 指定した位置にバイナリデータから JPEG 画像を描画します。
+- `Canvas.draw_pngstr(data, x, y)`: 指定した位置にバイナリデータから PNG 画像を描画します。
 
 #### その他のメソッド
 
 - `Canvas.scroll(dx, dy)`: 指定した量だけキャンバスをスクロールします。
-- `Canvas.set_rotation(rotation)`: キャンバスの回転を設定します（0-3、0°、90°、180°、270°を表します）。
+- `Canvas.set_rotation(rotation)`: キャンバスの回転を設定します（0-3、0°、90°、180°、270° を表します）。
 - `Canvas.dimension()`: キャンバスの寸法を [幅, 高さ] として返します。
 
 ---
 
 ## ボタン定数
 
-OpenBlinkは、デバイス上の物理ボタンにアクセスするための定数を提供します。
+OpenBlink は、デバイス上の物理ボタンにアクセスするための定数を提供します。
 
 #### 定数
 
-- `BtnA`: ボタンAへの参照。
-- `BtnB`: ボタンBへの参照。
-- `BtnC`: ボタンCへの参照。
+- `BtnA`: ボタン A への参照。
+- `BtnB`: ボタン B への参照。
+- `BtnC`: ボタン C への参照。
 
 #### メソッド
 

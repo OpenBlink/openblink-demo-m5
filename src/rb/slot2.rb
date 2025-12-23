@@ -8,7 +8,6 @@ GREEN = [0, 255, 0]
 BLUE = [0, 0, 255]
 
 while true
-  return if Blink.req_reload?
 
   led = !led
   led = true if Input.pressed?()

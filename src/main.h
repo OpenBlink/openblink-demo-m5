@@ -12,6 +12,7 @@
 #define MAIN_H
 
 #include <stdbool.h>
+#include <stdint.h>
 
 #include "lib/fn.h"
 
@@ -28,5 +29,12 @@ fn_t app_mrubyc_vm_set_reload(void);
  * @return true if reload is requested, false otherwise
  */
 bool app_mrubyc_vm_get_reload(void);
+
+/**
+ * @brief Sets the lock state of the blink request
+ *
+ * @return kSuccess always
+ */
+fn_t app_mrubyc_vm_set_blink_lock(const bool kState, const uint8_t kVmId);
 
 #endif
